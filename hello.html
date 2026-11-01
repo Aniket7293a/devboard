@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevBoard — Task Tracker</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:15px Arial,sans-serif;background:#f7f8fc;color:#172033}
+header{height:70px;background:#fff;border-bottom:1px solid #e8eaf0;display:flex;align-items:center;justify-content:space-between;padding:0 7%}
+.logo{font-size:23px;font-weight:700}.logo span{color:#635bdb}
+nav{display:flex;gap:25px;color:#667085}nav a{color:inherit;text-decoration:none}nav a:first-child{color:#5b50d6;font-weight:700}
+main{max-width:1200px;margin:55px auto;padding:0 24px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+h1{font-size:32px;margin:0 0 8px}.sub{color:#667085;margin:0}
+button{border:0;border-radius:9px;background:#5b50d6;color:#fff;padding:12px 18px;font-weight:600;cursor:pointer}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.column{background:#fff;border:1px solid #e8eaf0;border-radius:13px;min-height:330px;overflow:hidden}
+.column h2{font-size:17px;margin:0;padding:18px;background:#f0f1f7;display:flex;justify-content:space-between}
+.column:nth-child(2) h2{background:#f0efff}.column:nth-child(3) h2{background:#edf8f1}
+.count{color:#667085;font-size:14px}.tasks{padding:12px}
+.task{border:1px solid #e7e9ef;border-radius:10px;padding:15px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+.task input{margin-top:3px;accent-color:#5b50d6}.task.done .task-name{text-decoration:line-through;color:#98a2b3}
+.tag{display:inline-block;margin-top:8px;padding:4px 8px;border-radius:6px;background:#eef0ff;color:#5147b8;font-size:12px}
+@media(max-width:750px){.board{grid-template-columns:1fr}.top{align-items:flex-start;gap:15px;flex-direction:column}nav{gap:12px}}
+</style>
+</head>
+<body>
+<header><div class="logo"><span>⌘</span> DevBoard</div><nav><a href="#">Tasks</a><a href="#">Board</a><a href="#">Analytics</a></nav><div>●</div></header>
+<main>
+  <section class="top">
+    <div><h1>Task Tracking</h1><p class="sub">Plan, track, and ship your work.</p></div>
+    <button onclick="addTask()">+ Add Task</button>
+  </section>
+  <section class="board" id="board">
+    <div class="column"><h2>To Do <span class="count">2</span></h2><div class="tasks">
+      <div class="task"><input type="checkbox"><div><div class="task-name">Set up project repository</div><span class="tag">Setup</span></div></div>
+      <div class="task"><input type="checkbox"><div><div class="task-name">Design landing page</div><span class="tag">UI</span></div></div>
+    </div></div>
+    <div class="column"><h2>In Progress <span class="count">1</span></h2><div class="tasks">
+      <div class="task"><input type="checkbox"><div><div class="task-name">Integrate authentication</div><span class="tag">Backend</span></div></div>
+    </div></div>
+    <div class="column"><h2>Done <span class="count">2</span></h2><div class="tasks">
+      <div class="task done"><input type="checkbox" checked><div><div class="task-name">Create project structure</div><span class="tag">Setup</span></div></div>
+      <div class="task done"><input type="checkbox" checked><div><div class="task-name">Configure CI/CD pipeline</div><span class="tag">DevOps</span></div></div>
+    </div></div>
+  </section>
+</main>
+<script>
+document.querySelectorAll('.task input').forEach(box=>box.addEventListener('change',()=>box.closest('.task').classList.toggle('done',box.checked)));
+function addTask(){
+  const name=prompt('Enter task name:'); if(!name || !name.trim()) return;
+  const tasks=document.querySelector('.column .tasks');
+  const item=document.createElement('div'); item.className='task';
+  const check=document.createElement('input'); check.type='checkbox';
+  check.addEventListener('change',()=>item.classList.toggle('done',check.checked));
+  const label=document.createElement('div'); label.className='task-name'; label.textContent=name.trim();
+  item.append(check,label); tasks.append(item);
+  document.querySelector('.column .count').textContent=tasks.children.length;
+}
+</script>
+</body>
+</html>
