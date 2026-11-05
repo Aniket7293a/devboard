@@ -1,0 +1,3 @@
+ what if i want four combined commit into one 1
+
+ = git merge <branch> --squash HEAD~4

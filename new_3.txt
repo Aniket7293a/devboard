@@ -1,0 +1,3 @@
+ squash - combine multiple commit into one commit 
+
+syntax = git merge <branch> --squash HEAD~3
