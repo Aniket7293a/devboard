@@ -1,4 +1,5 @@
  here is the overall result of all the students:
 aniket = pass
 zoro = pass 
-luffy = pass 
+luffy = pass
+nami = fail 
