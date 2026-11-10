@@ -1,2 +1,5 @@
-Aniket = pass 
-loffy  = pass 
+ here is the overall result of all the students:
+aniket = pass
+zoro = pass 
+luffy = pass
+nami = fail 
